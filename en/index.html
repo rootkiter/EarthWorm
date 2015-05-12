@@ -1,0 +1,170 @@
+<!DOCTYPE html> 
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="../stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/print.css" media="print">
+
+    <title>EarthWorm</title>
+    <link rel="shortcut icon" href="../ew_img/logo.png">
+  </head>
+
+  <body>
+<script >
+</script>
+    <header>
+      <div class="logo_div">
+        <div class="logo_block"></div>
+        <img class="logo_img" src = "../ew_img/logo.png"/>
+      </div>
+      <div class="container">
+        <h1>Earthworm</h1>
+        <a href="../index.html">中文页</a>
+        <h2>EW is a simple network tunnel with SOCKS v5 sever and port transfer. It works well in various situations.</h2>
+
+        <section id="downloads" class="ctn">
+<div style="position:relative" class="m_down">
+    <div class= "down_btn">
+          <a  href="http://rootkiter.com/EarthWorm/download/ew.zip" class="btn">Download ew.zip</a>
+</div>
+<!-- </div><div class="logo_img">
+          <a href="http://rootkiter.com/EarthWorm/download/products/" class="btn">Download every files</a>
+          <a href="https://github.com/rootkiter/EarthWorm" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+-->
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <h3>
+<a id="欢迎来到earthworm的主页" class="anchor" href="#%E6%AC%A2%E8%BF%8E%E6%9D%A5%E5%88%B0earthworm%E7%9A%84%E4%B8%BB%E9%A1%B5" aria-hidden="true"><span class="octicon octicon-link"></span></a>Description</h3>
+
+<h4><p></p>
+
+<p>Use case example:</p>
+
+
+<div style="position:relative" class="out">
+    <div class="firewall_1"><img src="../ew_img/firewall.png"></img></div>
+    <div class="firewall_2"><img src="../ew_img/firewall.png"></img></div>
+    <div class="jiantou"><img src="../ew_img/jiantou.png"></img></div>
+    <div class="hacker"><img src="../ew_img/hacker.png"></img></div>
+    <div class="internet"><img src="../ew_img/internet.png"></img></div>
+    
+    <div class="lan_space">
+  
+            <img id="lan_img" src="../ew_img/lan_ground_en.png"></img>
+    </div>
+    
+    
+    <div class="deep_space"><img src="../ew_img/deep_ground_en.png"></img></div>
+    
+    <div class="linux_img">
+        <img src="../ew_img/linux_engine.png"></img>
+    </div>
+    <div class="windows_img">
+        <img src="../ew_img/win_engine.png"></img>
+    </div>
+    <div class="macos_img">
+        <img src="../ew_img/macos_engine.png"></img>
+    </div>
+    <div class="arm_img">
+        <img src="../ew_img/arm_engine.png"></img>
+    </div>
+    <div class="x86_img">
+        <img src="../ew_img/x86_engine.png"></img>
+    </div>
+    <div class="x64_img">
+        <img src="../ew_img/x64_engine.png"></img>
+    </div>
+    
+    <div class="deep_server">
+        <img src="../ew_img/servers.png"/>
+    </div>
+    
+</div>
+
+
+<p>It supports "forward", "backward" and "multi-transfer" modes and can penetrate deeply into the intranet.</p>
+
+<p>It support various OS such as Linux, Windows, MacOS, Arm-Linux. More is coming...</p>
+
+<h2><p>Usage:</p></h2>
+<p>The following examples are with default proxy port 1080 and SOCKSv5.</p>
+<h4><p> It has 6 command types: ssocksd, rcsocks, rssocks, lcx_slave, lcx_listen, lcx_tran.</p></h4>
+</h4>
+<h3><li>1. Forward SOCKS v5</li></h3>
+
+<pre><code>  $ ./ew -s ssocksd -l 1080</code></pre>
+
+<h3><li>2. Backward SOCKS v5</li></h3>
+<h4><p>&nbsp; 2 steps:</p>
+<p>&nbsp; a) Run the following command in hostA with public ip;</p></h4>
+<pre><code>  $ ./ew -s rcsocks -l 1080 -e 8888 </code></pre>
+<h4><p>&nbsp; b) Start SOCKS v5 server on hostB which will transfer the data to port 8888 of hostA.</p></h4>
+<pre><code>  $ ./ew -s rssocks -d 1.1.1.1 -e 8888 </code></pre>
+<h4><p>&nbsp;enjoy now.</p></h4>
+
+<h3><li> 3. multi-transfer</li></h3>
+<h4><p>&nbsp;It is realized with 3 port transfer commands,</p>
+<p>&nbsp;Transfer Example:</p>
+<pre><code>  $ ./ew -s lcx_listen -l  1080   -e 8888
+  $ ./ew -s lcx_tran   -l  1080   -f 2.2.2.3 -g 9999
+  $ ./ew -s lcx_slave  -d 1.1.1.1 -e 8888    -f 2.2.2.3  -g  9999</code></pre>
+
+<p>&nbsp;Double transfer example:</p>
+
+<h5><p>&nbsp; a) lcx_tran </p></h5>
+<pre><code>  $ ./ew -s ssocksd  -l 9999
+  $ ./ew -s lcx_tran -l 1080 -f 127.0.0.1 -g 9999</code></pre>
+
+<h5><p>&nbsp; b) lcx_listen、lcx_slave </p></h5>
+<pre><code>  $ ./ew -s lcx_listen -l 1080 -e 8888
+  $ ./ew -s ssocksd    -l 9999
+  $ ./ew -s lcx_slave  -d 127.0.0.1 -e 8888 -f 127.0.0.1 -g 9999</code></pre>
+
+<h4><p>&nbsp;Triple transfer example:</p>
+<pre><code>  $ ./ew -s rcsocks -l 1080 -e 8888
+  $ ./ew -s lcx_slave -d 127.0.0.1 -e 8888 -f 127.0.0.1 -g 9999
+  $ ./ew -s lcx_listen -l 9999 -e 7777
+  $ ./ew -s rssocks -d 127.0.0.1 -e 7777</code></pre>
+
+<p>&nbsp;Data flow: SOCKS v5 -> 1080 -> 8888 -> 9999 -> 7777 -> rssocks .</p>
+
+
+</h4>
+
+<h2><p>PS：</p></h2>
+<h4><p>1.Default timeout is 10s which can be set with -t arg.</p></h4>
+<h4><p>2.Multi-transfer works on any tcp service such as RDP and ssh.
+</p></h4>
+<h4><p>3.ew_for_arm_32 works well on Android, MiWiFi(base OpenWrt on ARM) and Raspberry Pi.</p></h4>
+<h4><p>4.Reference: http://www.freebuf.com/articles/system/12182.html</p>
+<p>5.Please use EW under the law.</p><h4>
+<h2><p>Contact：</p></h2>
+<h6>
+<p>rootkiter@sectree.com </p>
+
+<!-- <p>rootkiter@rootkiter.com </p>
+-->
+<p>You can email me with more ideas or bugs. I will try my best to make EW better.</p></h6>
+
+
+<h2><p>Thanks：</p></h2>
+
+<h6><p>I have many good friends and colleagues. We created this tool together. Hope they better than better.</p></h6>
+<h5><p>demi6od help me to translate this page into English. Special thanks to him.<br>
+By adding -a arg ,you can see more of my friends ( Why -a? Because they are shy :-P ).
+</p>
+<p> </p></h5>
+
+      </section>
+    </div>
+
+    
+  </body>
+</html>

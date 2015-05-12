@@ -1,0 +1,169 @@
+<!DOCTYPE html> 
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <title>EarthWorm</title>
+    <link rel="shortcut icon" href="./ew_img/logo.png">
+  </head>
+
+  <body>
+<script >
+</script>
+    <header>
+      <div class="logo_div">
+        <div class="logo_block"></div>
+        <img class="logo_img" src = "./ew_img/logo.png"/>
+      </div>
+      <div class="container">
+        <h1>Earthworm</h1> <a href="./en/index.html">English Pages</a>
+        <h2>EW 是一套便携式的网络穿透工具，具有 SOCKS v5服务架设和端口转发两大核心功能，可在复杂网络环境下完成网络穿透。</h2>
+
+        <section id="downloads" class="ctn">
+<div style="position:relative" class="m_down">
+    <div class= "down_btn">
+          <a  href="http://rootkiter.com/EarthWorm/download/ew.zip" class="btn">Download ew.zip</a>
+</div>
+<!-- </div><div class="logo_img">
+          <a href="http://rootkiter.com/EarthWorm/download/products/" class="btn">Download every files</a>
+          <a href="https://github.com/rootkiter/EarthWorm" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+-->
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <h3>
+<a id="欢迎来到earthworm的主页" class="anchor" href="#%E6%AC%A2%E8%BF%8E%E6%9D%A5%E5%88%B0earthworm%E7%9A%84%E4%B8%BB%E9%A1%B5" aria-hidden="true"><span class="octicon octicon-link"></span></a>关于 EW 的介绍</h3>
+
+<h4><p></p>
+
+<p>下图是一张示意图:</p>
+
+
+<div style="position:relative" class="out">
+    <div class="firewall_1"><img src="./ew_img/firewall.png"></img></div>
+    <div class="firewall_2"><img src="./ew_img/firewall.png"></img></div>
+    <div class="jiantou"><img src="./ew_img/jiantou.png"></img></div>
+    <div class="hacker"><img src="./ew_img/hacker.png"></img></div>
+    <div class="internet"><img src="./ew_img/internet.png"></img></div>
+    
+    <div class="lan_space">
+  
+            <img id="lan_img" src="./ew_img/lan_ground.png"></img>
+    </div>
+    
+    
+    <div class="deep_space"><img src="./ew_img/deep_ground.png"></img></div>
+    
+    <div class="linux_img">
+        <img src="./ew_img/linux_engine.png"></img>
+    </div>
+    <div class="windows_img">
+        <img src="./ew_img/win_engine.png"></img>
+    </div>
+    <div class="macos_img">
+        <img src="./ew_img/macos_engine.png"></img>
+    </div>
+    <div class="arm_img">
+        <img src="./ew_img/arm_engine.png"></img>
+    </div>
+    <div class="x86_img">
+        <img src="./ew_img/x86_engine.png"></img>
+    </div>
+    <div class="x64_img">
+        <img src="./ew_img/x64_engine.png"></img>
+    </div>
+    
+    <div class="deep_server">
+        <img src="./ew_img/servers.png"/>
+    </div>
+    
+</div>
+
+
+<p>该工具能够像“蚯蚓钻洞”一样，以“正向”、“反向”、“多级级联”等方式打通一条网络隧道，直达网络深处。</p>
+
+<p>工具包中提供了多种可执行文件，以适用不同的操作系统，Linux、Windows、MacOS、Arm-Linux 均被包括其内，更多平台的支持还在维护中，敬请期待。</p>
+
+<h2><p>使用方法：</p></h2>
+<p>以下所有样例，如无特殊说明代理端口均为1080，服务均为SOCKSv5代理服务.</p>
+<h4><p> 该工具共有 6 种命令格式（ssocksd、rcsocks、rssocks、lcx_slave、lcx_listen、lcx_tran）。</p></h4>
+</h4>
+<h3><li>1. 正向 SOCKS v5 服务器</li></h3>
+
+<pre><code>  $ ./ew -s ssocksd -l 1080</code></pre>
+
+<h3><li>2. 反弹 SOCKS v5 服务器</li></h3>
+<h4><p>&nbsp; 这个操作具体分两步：</p>
+<p>&nbsp; a) 先在一台具有公网 ip 的主机A上运行以下命令：</p></h4>
+<pre><code>  $ ./ew -s rcsocks -l 1080 -e 8888 </code></pre>
+<h4><p>&nbsp; b) 在目标主机B上启动 SOCKS v5 服务 并反弹到公网主机的 8888端口</p></h4>
+<pre><code>  $ ./ew -s rssocks -d 1.1.1.1 -e 8888 </code></pre>
+<h4><p>&nbsp;成功。</p></h4>
+
+<h3><li> 3. 多级级联 </li></h3>
+<h4><p>&nbsp;工具中自带的三条端口转发指令，</p>
+<p>&nbsp;它们的参数格式分别为：</p>
+<pre><code>  $ ./ew -s lcx_listen -l  1080   -e 8888
+  $ ./ew -s lcx_tran   -l  1080   -f 2.2.2.3 -g 9999
+  $ ./ew -s lcx_slave  -d 1.1.1.1 -e 8888    -f 2.2.2.3  -g  9999</code></pre>
+
+<p>&nbsp;通过这些端口转发指令可以将处于网络深层的基于TCP的服务转发至根前,比如 SOCKS v5。</p>
+<p>&nbsp;首先提供两个“二级级联”本地SOCKS测试样例：</p>
+
+<h5><p>&nbsp; a) lcx_tran 的用法</p></h5>
+<pre><code>  $ ./ew -s ssocksd  -l 9999
+  $ ./ew -s lcx_tran -l 1080 -f 127.0.0.1 -g 9999</code></pre>
+
+<h5><p>&nbsp; b) lcx_listen、lcx_slave 的用法</p></h5>
+<pre><code>  $ ./ew -s lcx_listen -l 1080 -e 8888
+  $ ./ew -s ssocksd    -l 9999
+  $ ./ew -s lcx_slave  -d 127.0.0.1 -e 8888 -f 127.0.0.1 -g 9999</code></pre>
+
+<h4><p>&nbsp;再提供一个“三级级联”的本地SOCKS测试用例以供参考</p>
+<pre><code>  $ ./ew -s rcsocks -l 1080 -e 8888
+  $ ./ew -s lcx_slave -d 127.0.0.1 -e 8888 -f 127.0.0.1 -g 9999
+  $ ./ew -s lcx_listen -l 9999 -e 7777
+  $ ./ew -s rssocks -d 127.0.0.1 -e 7777</code></pre>
+
+<p>&nbsp;数据流向:  SOCKS v5 -> 1080 -> 8888 -> 9999 -> 7777 -> rssocks </p>
+
+
+</h4>
+
+<h2><p>补充说明：</p></h2>
+<h4><p>1.为了减少网络资源的消耗，程序中添加了超时机制，默认时间为10000毫秒（10秒），用户可以通过追加 -t 参数来调整这个值，单位为毫秒。在多级级联功能中，超时机制将以隧道中最短的时间为默认值。</p></h4>
+<h4><p>2.多级级联的三种状态可以转发任意以TCP为基础的通讯服务，包括远程桌面／ssh服务 等。</p></h4>
+<h4><p>3. ew_for_arm_32 在android手机、小米路由器和树莓派 上测试无误。</p></h4>
+<h4><p>4.该工具借用了 ssocks 和 lcx.exe 的操作逻辑，并进行更多的功能强化，才最终成型。吃水不忘挖井人，下面附上一篇介绍 sSocks 的帖子链接。
+http://www.freebuf.com/articles/system/12182.html
+</p><p>5.工具本身并无好坏，希望大家以遵守相关法律为前提来使用该工具，对于恶意使用该工具造成的损失，和开发者无关。</p><h4>
+<h2><p>联系作者：</p></h2>
+<h6>
+<p>rootkiter@sectree.com </p>
+
+<!-- <p>rootkiter@rootkiter.com </p>
+-->
+<p>如果您在使用中有什么好想法，或遇到什么BUG，都可以主动联系我。我会尽最大所能让这个工具更加完美。</p></h6>
+
+
+<h2><p>鸣谢：</p></h2>
+
+<h6><p>感谢各位同事和朋友的支持，没有你们的帮助就不会有这样一款工具。愿你们越来越 v5，越来越 87。</p></h6>
+<h5><p>想知道都有谁提供过帮助 ? 使用 -a 参数就能看到他们。<br>
+</p>
+<p> </p></h5>
+
+      </section>
+    </div>
+
+    
+  </body>
+</html>
